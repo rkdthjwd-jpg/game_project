@@ -49,17 +49,26 @@ class App:
                     if game_menu == 1:
                         game = UpDownGame()
                         nickname, tries = game.play()
-                        self.ranking_board.add_record(nickname, tries)
+                        if nickname is not None:
+                            self.ranking_board.add_record("updown", nickname, tries)
                         break
 
                     elif game_menu == 2:
                         game = HangmanGame()
+                        nickname, tries = game.play()
+                        if nickname is not None:
+                            self.ranking_board.add_record("hangman", nickname, tries)
+                        break
 
             elif menu == 2:
-                self.ranking_board.show_ranking()
+                print("UpDownGame")
+                self.ranking_board.show_ranking("updown")
+                print("HangmanGame")
+                self.ranking_board.show_ranking("hangman")
             
             elif menu == 3:
                 print("프로그램을 종료합니다.")
+                break
             
             else:
                 print("잘못된 메뉴입니다.")

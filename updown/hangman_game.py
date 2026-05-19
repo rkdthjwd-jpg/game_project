@@ -1,8 +1,7 @@
 import random
 
 class HangmanGame:
-    def __init__(self, records):
-        self.records = records
+    def __init__(self):
         self.words = ["python","apple","banana","school","computer"]
         self.answer = random.choice(self.words)
         self.new_answer = ["_"]*len(self.answer)
@@ -13,7 +12,9 @@ class HangmanGame:
     def show_answer(self):
         for i in range(len(self.new_answer)):
             print(self.new_answer[i], end="")
-        print(self.answer) #test용
+        
+        print()
+        print(f"정답: {self.answer}") #test
 
     def guess(self):
         while True:
@@ -49,10 +50,8 @@ class HangmanGame:
                     print("정답입니다!")
                     print(f"시도횟수: {self.count}회")
 
-                    user_id = input("닉네임을 입력해주세요: ")
-                    self.records.append([self.count, user_id])
-                    self.records.sort()
-                    return                
+                    nickname = input("닉네임을 입력해주세요: ")
+                    return nickname, self.count
             else:
                 self.life -= 1
                 print("틀렸습니다.")
@@ -61,3 +60,4 @@ class HangmanGame:
     
         print("Game over")
         print(f"정답은 {self.answer}였습니다.")
+        return None, self.count
